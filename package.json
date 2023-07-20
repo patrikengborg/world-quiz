@@ -26,6 +26,7 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource-variable/grandstander": "^5.0.6",
+		"just-random": "^3.2.0",
 		"just-shuffle": "^4.2.0",
 		"lucide-svelte": "^0.262.0"
 	}

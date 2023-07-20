@@ -1,52 +1,83 @@
 <script>
+	import { fade } from 'svelte/transition'
+	import { cubicOut, cubicIn } from 'svelte/easing'
 	import { page } from '$app/stores'
-	const countries = $page.data.countries
+	import Results from '$lib/components/Results.svelte'
+	import Capital from '$lib/components/question_types/Capital.svelte'
+	import Landlocked from '$lib/components/question_types/Landlocked.svelte'
+	import Population from '$lib/components/question_types/Population.svelte'
+	import Equator from '$lib/components/question_types/Equator.svelte'
+	import Language from '$lib/components/question_types/Language.svelte'
 
-	let answers = []
-	let answer = ''
-	let step = 1
+	const questions = $page.data.questions
+	console.log(questions)
 
-	$: num_questions = countries.length
-	$: question_is_answered = !!answer.trim()
-	$: current_question = countries[step - 1]
-	$: num_correct_answers = answers.filter((item) => item).length
-
-	function next_step() {
-		const is_correct = answer === current_question.capital
-		answers = [...answers, is_correct]
-		answer = ''
-		step++
+	const components = {
+		Capital,
+		Landlocked,
+		Population,
+		Equator,
+		Language
 	}
 
-	function prev_step() {}
+	let answers = []
+	let step = 1
+	let is_finished = false
+
+	$: num_questions = questions.length
+	$: num_answers = answers.length
+	$: question = questions[step - 1]?.data
+	$: type = questions[step - 1]?.type
+
+	$: current_question_component = components[type]
+
+	// Mark as finished when all questions have been answered
+	$: if (num_questions === num_answers) {
+		is_finished = true
+	}
+
+	function on_answer_question({ detail }) {
+		answers = [...answers, detail]
+		step++
+	}
 </script>
 
-<div class="w-full mt-8">
-	{#if step > num_questions}
-		<p class="text-center">
-			You had {num_correct_answers} correct {num_correct_answers === 1 ? 'answer' : 'answers'}
-		</p>
-	{:else}
-		<form action="" class="gap-4 flex flex-col items-center text-center" on:submit={next_step}>
-			{step} / {num_questions}
+<div class="w-full">
+	<!--
+	<p>{JSON.stringify(answers)}</p>
+	<p>is_finished {is_finished}</p>
+	<p>num_questions {num_questions}</p>
+	<p>num_answers {num_answers}</p> -->
+	{#key is_finished}
+		<div in:fade={{ duration: 500, delay: 300 }}>
+			{#if is_finished}
+				<Results {questions} {answers} />
+			{:else}
+				<div>
+					<div class="text-center">
+						<p class="rounded-full mb-6 bg-zinc-100 inline-flex px-2 py-1">
+							{step} / {num_questions}
+						</p>
+					</div>
 
-			<figure class="text-4xl text-center">
-				{current_question.flag}
-			</figure>
+					{#key step}
+						<div
+							in:fade={{ duration: 200, delay: 300, easing: cubicOut }}
+							out:fade={{ duration: 200, easing: cubicIn }}
+						>
+							<figure class="text-center text-4xl">
+								{question.flag}
+							</figure>
 
-			<h2>
-				What is the capital of {current_question.name.common} ?
-			</h2>
-
-			<input autofocus type="text" class="border border-gray-200 p-3 w-full" bind:value={answer} />
-
-			<div class="mt-4">
-				<button type="submit" class="btn" disabled={!question_is_answered}>Next question</button>
-			</div>
-
-			<!-- <div>
-				<button type="button" on:click={prev_step}>Back</button>
-			</div> -->
-		</form>
-	{/if}
+							<svelte:component
+								this={current_question_component}
+								{question}
+								on:answer={on_answer_question}
+							/>
+						</div>
+					{/key}
+				</div>
+			{/if}
+		</div>
+	{/key}
 </div>
