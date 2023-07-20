@@ -33,8 +33,8 @@
 
 		dispatch('answer', {
 			human_question,
-			given_answer: `${options.find((item) => item[1] === answer)[0]} millon people`,
-			answer: `${population_rounded} millon people`,
+			given_answer: `${options.find((item) => item[1] === answer)[0]} million`,
+			answer: `${population_rounded} million`,
 			is_correct
 		})
 		answer = undefined
