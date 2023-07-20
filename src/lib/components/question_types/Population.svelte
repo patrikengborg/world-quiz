@@ -52,8 +52,4 @@
 	<div class="mt-4">
 		<button type="submit" class="btn" disabled={!question_is_answered}>Next question</button>
 	</div>
-
-	<!-- <div>
-				<button type="button" on:click={prev_step}>Back</button>
-			</div> -->
 </form>
