@@ -42,7 +42,7 @@
 	}
 </script>
 
-<div class="w-full">
+<div class="w-full max-w-lg mx-auto">
 	<!--
 	<p>{JSON.stringify(answers)}</p>
 	<p>is_finished {is_finished}</p>
