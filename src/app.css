@@ -14,7 +14,7 @@
 
 @layer components {
 	.btn {
-		@apply bg-teal-600 text-teal-50 px-6 py-3 rounded text-lg;
+		@apply bg-teal-600 text-teal-50 px-6 pt-4 pb-3 rounded text-lg;
 	}
 }
 
