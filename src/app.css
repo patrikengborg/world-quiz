@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		font-family: 'Grandstander Variable', sans-serif;
+	}
+
+	button[disabled] {
+		@apply opacity-50 cursor-not-allowed;
+	}
+}
+
+@layer components {
+	.btn {
+		@apply bg-cyan-600 text-cyan-50 px-6 py-3 rounded text-lg;
+	}
+}
