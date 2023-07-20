@@ -20,7 +20,7 @@
 
 <div class="text-center w-full my-auto">
 	<figure
-		class="absolute origin-center translate-x-1/2 left-1/2 -mt-16"
+		class="absolute origin-center left-0 right-0 -mt-16"
 		style="transform:scale({1 + flag_index * 0.05});opacity:{1 - flag_index * 0.003};"
 	>
 		{flag}
