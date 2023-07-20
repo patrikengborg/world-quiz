@@ -48,7 +48,7 @@
 				</figure>
 
 				<div class="col-span-3">
-					<h2 class="relative mb-2 text-lg">
+					<h2 class="relative leading-tight mb-2 text-lg">
 						<strong class="absolute -left-6">{idx + 1}</strong>
 						{JSON.stringify(item.human_question)}
 					</h2>
