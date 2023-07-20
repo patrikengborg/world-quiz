@@ -25,7 +25,7 @@
 	}
 
 	label:has(:checked) {
-		@apply bg-teal-600 text-teal-50;
+		@apply bg-teal-800 text-teal-50;
 
 		& .unchecked {
 			@apply hidden;

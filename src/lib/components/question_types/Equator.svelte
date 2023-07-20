@@ -33,7 +33,11 @@
 	}
 </script>
 
-<form action="" class="gap-4 flex flex-col items-center text-center" on:submit={on_submit}>
+<form
+	method="post"
+	class="gap-4 flex flex-col items-center text-center"
+	on:submit|preventDefault={on_submit}
+>
 	<h2>{human_question}</h2>
 
 	<div class="grid grid-cols-2 gap-4">
@@ -42,7 +46,7 @@
 		{/each}
 	</div>
 
-	<div class="mt-4">
+	<div class="mt-8">
 		<button type="submit" class="btn" disabled={!question_is_answered}>Next question</button>
 	</div>
 </form>

@@ -22,7 +22,7 @@
 
 		dispatch('answer', {
 			human_question,
-			given_answer: answer,
+			given_answer: answer ? 'Yes' : 'No',
 			answer: question.landlocked ? 'Yes' : 'No',
 			is_correct
 		})
@@ -31,7 +31,11 @@
 	}
 </script>
 
-<form action="" class="gap-4 flex flex-col items-center text-center" on:submit={on_submit}>
+<form
+	action=""
+	class="gap-4 flex flex-col items-center text-center"
+	on:submit|preventDefault={on_submit}
+>
 	<h2>
 		{human_question}
 		<small class="block mt-3"
@@ -46,7 +50,7 @@
 		{/each}
 	</div>
 
-	<div class="mt-4">
+	<div class="mt-8">
 		<button type="submit" class="btn" disabled={!question_is_answered}>Next question</button>
 	</div>
 </form>

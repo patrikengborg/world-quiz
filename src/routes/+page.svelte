@@ -20,16 +20,16 @@
 
 <div class="text-center w-full my-auto">
 	<figure
-		class="absolute translate-x-1/2 left-1/2 -mt-16"
+		class="absolute origin-center translate-x-1/2 left-1/2 -mt-16"
 		style="transform:scale({1 + flag_index * 0.05});opacity:{1 - flag_index * 0.003};"
 	>
 		{flag}
 	</figure>
 
 	<div class="mb-8">
-		<h1 class="font-medium text-xl mb-2">Welcome to the world quiz!</h1>
+		<h1 class="font-medium text-xl mb-2">Welcome to the World quiz!</h1>
 
-		<p>Let's find out how much you know about our planet and its places.</p>
+		<p class="text-zinc-500">Let's find out how much you know about our planet and its places.</p>
 	</div>
 
 	<a href="/quiz" class="btn">Get started!</a>

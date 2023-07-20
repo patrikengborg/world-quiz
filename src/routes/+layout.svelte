@@ -10,7 +10,7 @@
 	<header class="p-4 bg-teal-600 text-teal-50 items-center grid grid-cols-3">
 		<a href="/" class:opacity-0={$page.url.pathname === '/'} class="text-sm">Cancel</a>
 
-		<div class="flex items-center">
+		<div class="flex justify-center items-center">
 			<figure class="mr-2">
 				<Globe2 />
 			</figure>
@@ -20,7 +20,7 @@
 	</header>
 
 	{#key $page.url}
-		<main class="p-4 my-4 flex-grow flex overflow-scroll" in:fade={{ duration: 200, delay: 400 }}>
+		<main class="px-4 py-8 flex-grow flex overflow-scroll" in:fade={{ duration: 200, delay: 400 }}>
 			<slot />
 		</main>
 	{/key}

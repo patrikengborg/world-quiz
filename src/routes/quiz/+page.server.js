@@ -12,7 +12,7 @@ export async function load() {
 	const question_types = ['Capital', 'Landlocked', 'Population', 'Equator', 'Language']
 	//const question_types = ['Capital']
 
-	const num_questions = 3
+	const num_questions = 10
 
 	const questions = shuffle(data)
 		// some countries don't have info about capital

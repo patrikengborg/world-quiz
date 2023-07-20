@@ -5,7 +5,7 @@
 	const dispatch = createEventDispatcher()
 
 	export let question
-	$: human_question = `What is the population of ${question.name.common} in million people?`
+	$: human_question = `What is the population of ${question.name.common}, in million people?`
 
 	let answer
 
@@ -24,21 +24,28 @@
 		return Math.round(parseFloat(number) / 1000000)
 	}
 
-	function on_submit() {
+	function on_submit(e) {
+		console.log(e.preventDefault())
+		e.preventDefault()
+
 		const population_rounded = round_to_nearest_million(question.population)
 		const is_correct = population_rounded >= answer[0] && population_rounded < answer[1]
 
 		dispatch('answer', {
 			human_question,
-			given_answer: options.find((item) => item[1] === answer)[0],
-			answer: population_rounded,
+			given_answer: `${options.find((item) => item[1] === answer)[0]} millon people`,
+			answer: `${population_rounded} millon people`,
 			is_correct
 		})
 		answer = undefined
 	}
 </script>
 
-<form action="" class="gap-4 flex flex-col items-center text-center" on:submit={on_submit}>
+<form
+	method="post"
+	class="gap-4 flex flex-col items-center text-center"
+	on:submit|preventDefault={on_submit}
+>
 	<h2>
 		{human_question}
 	</h2>
@@ -49,7 +56,7 @@
 		{/each}
 	</div>
 
-	<div class="mt-4">
+	<div class="mt-8">
 		<button type="submit" class="btn" disabled={!question_is_answered}>Next question</button>
 	</div>
 </form>
