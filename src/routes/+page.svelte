@@ -26,10 +26,12 @@
 		{flag}
 	</figure>
 
-	<div class="mb-8">
+	<div class="mb-8 text-zinc-500">
 		<h1 class="font-medium text-xl mb-2">Welcome to the World quiz!</h1>
 
-		<p class="text-zinc-500">Let's find out how much you know about our planet and its places.</p>
+		<p class="mb-6">Let's find out how much you know about our planet and its places.</p>
+
+		<p class="text-sm">Quick answer gets rewarded!<br />Pay attention to the timer ⏰</p>
 	</div>
 
 	<a href="/quiz" class="btn">Get started!</a>

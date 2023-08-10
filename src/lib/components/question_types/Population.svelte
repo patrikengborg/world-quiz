@@ -12,12 +12,12 @@
 	$: question_is_answered = answer !== undefined
 
 	const options = [
-		['< 5', [0, 5]],
-		['5 - 10', [5, 10]],
-		['10 - 50', [10, 50]],
-		['50 - 100', [50, 100]],
-		['100 - 300', [100, 300]],
-		['> 300', [300, 1500]]
+		['less than 5', [0, 5]],
+		['5 - 9', [5, 9]],
+		['10 - 49', [10, 49]],
+		['50 - 99', [50, 99]],
+		['100 - 299', [100, 299]],
+		['300 or more', [300, 10000]]
 	]
 
 	function round_to_nearest_million(number) {
@@ -29,7 +29,7 @@
 		e.preventDefault()
 
 		const population_rounded = round_to_nearest_million(question.population)
-		const is_correct = population_rounded >= answer[0] && population_rounded < answer[1]
+		const is_correct = population_rounded >= answer[0] && population_rounded <= answer[1]
 
 		dispatch('answer', {
 			human_question,

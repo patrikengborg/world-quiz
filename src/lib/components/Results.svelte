@@ -4,9 +4,21 @@
 	export let answers
 	export let questions
 
-	$: num_questions = questions.length
-	$: prc_correct = (num_correct_answers / num_questions) * 100
-	$: num_correct_answers = answers.filter((item) => item.is_correct).length
+	const max_point = 12
+
+	const max_score = answers.length * max_point
+	const total_score = answers.reduce((accumulator, { score }) => accumulator + score, 0)
+	const bonus_points = answers.reduce((accumulator, { score }) => {
+		return accumulator + (score === 12 ? 2 : 0)
+	}, 0)
+
+	const minus_points = answers.reduce((accumulator, { score }) => {
+		return score === 8 ? 2 : 0
+	}, 0)
+
+	const num_questions = questions.length
+	const num_correct_answers = answers.filter((item) => item.is_correct).length
+	const prc_correct = (num_correct_answers / num_questions) * 100
 
 	const icon_size = 36
 </script>
@@ -30,10 +42,16 @@
 		{/if}
 	</p>
 
-	<p class="text-center mb-4 pb-1 mt-2">
+	<p class="text-center pb-1 mt-2 mb-4 text-lg wrap-balance">
 		You had <strong> {num_correct_answers}</strong> correct {num_correct_answers === 1
 			? 'answer'
-			: 'answers'}
+			: 'answers'} and a score of <strong>{total_score}/{max_score}</strong>.
+	</p>
+
+	<p class="text-center mb-6">
+		You got
+		<strong>{bonus_points}</strong> bonus points for quick answers and
+		<strong>{minus_points} </strong> were removed from your score because of slow answers.
 	</p>
 
 	<ul class="mb-12 text-sm">

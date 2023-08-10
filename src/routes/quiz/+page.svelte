@@ -10,7 +10,6 @@
 	import Language from '$lib/components/question_types/Language.svelte'
 
 	const questions = $page.data.questions
-	console.log(questions)
 
 	const components = {
 		Capital,
@@ -19,6 +18,16 @@
 		Equator,
 		Language
 	}
+
+	let timer = 10
+
+	setInterval(() => {
+		if (timer === 0) {
+			return
+		}
+
+		timer--
+	}, 1000)
 
 	let answers = []
 	let step = 1
@@ -37,7 +46,16 @@
 	}
 
 	function on_answer_question({ detail }) {
-		answers = [...answers, detail]
+		let score = 0
+
+		if (detail.is_correct) {
+			score = 8 + Math.ceil(timer / 5) * 2
+		}
+
+		answers = [...answers, { ...detail, score }]
+
+		// Reset timer anb go to the next question
+		timer = 10
 		step++
 	}
 </script>
@@ -54,7 +72,14 @@
 				<Results {questions} {answers} />
 			{:else}
 				<div>
-					<div class="text-center">
+					<div class="flex justify-between">
+						<p
+							class="text-green-600"
+							class:text-red-600={timer === 0}
+							class:text-orange-600={timer < 5}
+						>
+							{timer}
+						</p>
 						<p class="rounded-full mb-6 bg-zinc-100 inline-flex px-2 py-1">
 							{step} / {num_questions}
 						</p>
